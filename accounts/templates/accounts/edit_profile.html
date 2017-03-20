@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Edit Profile</title>
+{% endblock %}
+
+{% block body%}
+<div class="container">
+
+<h1>Edit your true pimp profile :)</h1>
+<form  method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit" name="button">Done !</button>
+</form>
+{% endblock %}
