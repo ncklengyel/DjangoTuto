@@ -25,7 +25,7 @@ SECRET_KEY = '6lvaiijmmn@d78$dz1at@*m$hpn#tr_=@wysftbkh*8upe$m)d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.100']
+ALLOWED_HOSTS = ['192.168.0.100','192.168.0.112']
 
 
 # Application definition
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'lab5.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'lab5.urls'
@@ -121,6 +122,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/account/'
+
+LOGIN_EXEMPT_URLS = (
+    r'^account/logout/$',
+    r'^account/register/$',
+)
 
 # pour les email de password reset
 # python -m smtpd -n -c DebuggingServer localhost:1025

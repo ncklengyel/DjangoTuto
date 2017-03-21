@@ -6,12 +6,14 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 
-@login_required
+#@login_required
 def home(request):
-    numbers = [1,2,3,4,5]
-    name = 'nick'
-    args = {'name': name, 'numbers': numbers}
-    return render(request, 'accounts/home.html', args)
+    if request.user.is_authenticated:
+        return render(request, 'accounts/home.html')
+
+    else:
+        return redirect('/account/login/')
+
 
 def register(request):
     if request.method == 'POST':
