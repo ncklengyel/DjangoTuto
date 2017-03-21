@@ -24,17 +24,38 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/account">Tu connais mon Boy sous commerce</a>
+          <a class="navbar-brand" href="/account">Tu connais mon boy</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/admin/">Admin</a></li>
-            <li><a href="/account/login">Log in</a></li>
+          <!-- nav bar pour les user loged in  -->
+          {% if user.is_authenticated %}
+          <ul class="nav navbar-nav">
+            <li><a href="/account/">Home</a></li>
+            <li><a href="/account/login/">Login</a></li>
             <li><a href="/account/profile">Profile</a></li>
-            <li><a href="/account/change-password/">passwd</a></li>
+            <li><a href="/account/profile/edit/">Edit</a></li>
+            <li><a href="/account/change-password/">Change passwd</a></li>
+            <li><a href="/account/reset-password/">Reset passwd</a></li>
+            <li><a href="/admin/">Admin</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/account/logout/">Logout</a></li>
+          </ul>
+
+          <!-- nav bar pour les user non loged in  -->
+          {% else %}
+          <ul class="nav navbar-nav">
+            <li><a href="/admin/">Admin</a></li>
+          </ul>
+
+
+          <ul class="nav navbar-nav navbar-right">
+              <li><a href="/account/login/">Login</a></li>
             <li><a href="/account/register">Register</a></li>
           </ul>
+            {% endif %}
         </div><!--/.nav-collapse -->
       </div><!--/.container-fluid -->
     </nav>
