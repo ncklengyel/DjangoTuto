@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,8 @@ LOGIN_URL = '/account/login/'
 LOGIN_EXEMPT_URLS = (
     r'^account/logout/$',
     r'^account/register/$',
+    r'^account/lock-out/$',
+
 )
 
 # pour les email de password reset
@@ -144,3 +147,15 @@ SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 '''
+
+#SESSIONS CONFIGS
+SESSION_COOKIE_AGE = 60 #logout le user apres X secondes
+SESSION_SAVE_EVERY_REQUEST = True
+
+#AXES CONFIGS
+AXES_LOGIN_FAILURE_LIMIT = 3
+AXES_USE_USER_AGENT = False
+AXES_COOLOFF_TIME = 1 #1 heure
+AXES_ONLY_USER_FAILURES = False
+AXES_NEVER_LOCKOUT_WHITELIST = False
+AXES_IP_WHITELIST = []

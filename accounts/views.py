@@ -6,6 +6,9 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 
+def lock_out(request):
+    return render(request, 'accounts/lock_out.html')
+
 #@login_required
 def home(request):
     if request.user.is_authenticated:
