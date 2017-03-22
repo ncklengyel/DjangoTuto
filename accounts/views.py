@@ -3,8 +3,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from accounts.forms import RegistrationForm, EditProfileForm
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, logout
 from django.contrib.auth.decorators import login_required
+from lab5 import settings
 
 def lock_out(request):
     return render(request, 'accounts/lock_out.html')
@@ -46,8 +47,13 @@ def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()
-            return redirect('/account/profile/')
+            password_confirmation = form.cleaned_data['password_confirmation']
+            if request.user.check_password(password_confirmation):
+                form.save()
+                return redirect('/account/profile/')
+            else:
+                logout(request)
+                return redirect('/account/login/')
 
     else:
         form = EditProfileForm(instance=request.user)

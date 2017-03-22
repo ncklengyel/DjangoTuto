@@ -31,6 +31,7 @@ class RegistrationForm(UserCreationForm):
 form qui herite de UserChangeForm pour edit les info du user
 '''
 class EditProfileForm(UserChangeForm):
+    password_confirmation = forms.CharField(widget=forms.PasswordInput,required=True)
 
     class Meta:
         model = User
