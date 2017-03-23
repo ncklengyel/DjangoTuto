@@ -23,9 +23,12 @@ class UserProfile(models.Model):
 
 class PreposeResidentielProfile(models.Model):
     user = models.OneToOneField(User)
+    prep_type = models.CharField(max_length=100, default='prep_residentiel')
 
-    def is_prep_residentiel(self):
-        return True
+    class Meta:
+        permissions = (
+            ('view_all_clients', 'can view all clients'),
+        )
 
     def __str__(self):
         return self.user.username
@@ -35,14 +38,12 @@ class PreposeResidentielProfile(models.Model):
     def create_or_update_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
-        instance.profile.save()
+        post_save.connect(create_profile, sender=User)
 
 
 class PreposeAffaireProfile(models.Model):
     user = models.OneToOneField(User)
-
-    def is_prep_affaire(self):
-        return True
+    prep_type = models.CharField(max_length=100, default='prep_affaire')
 
     def __str__(self):  # __unicode__ for Python 2
         return self.user.username
@@ -52,7 +53,7 @@ class PreposeAffaireProfile(models.Model):
     def create_or_update_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
-        instance.profile.save()
+        post_save.connect(create_profile, sender=User)
 
 
 class ClientResidentiel(models.Model):

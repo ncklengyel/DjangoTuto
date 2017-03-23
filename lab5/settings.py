@@ -133,14 +133,15 @@ LOGIN_EXEMPT_URLS = (
 
 )
 
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+
 # pour les email de password reset
 # python -m smtpd -n -c DebuggingServer localhost:1025
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
 
-#HTTPS settings -> fonctionne pas sur le serveur de production
-
+#HTTPS settings
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True

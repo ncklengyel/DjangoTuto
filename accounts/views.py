@@ -83,10 +83,20 @@ def change_password(request):
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
 
+
 def client_list(request):
-    client_list_res = ClientResidentiel.objects.order_by('email')
-    client_list_aff = ClientAffaire.objects.order_by('email')
 
+    print(request.user.username)
+    print(request.user.has_perm('accounts.view_all_clients'))
 
-    args = {'client_list_res': client_list_res, 'client_list_aff': client_list_aff }
-    return render(request, 'accounts/client_list.html', args)
+    if request.user.has_perm('accounts.view_all_clients') or request.user.is_superuser:
+        client_list_res = ClientResidentiel.objects.order_by('email')
+        client_list_aff = ClientAffaire.objects.order_by('email')
+
+        args = {'client_list_res': client_list_res, 'client_list_aff': client_list_aff }
+        return render(request, 'accounts/client_list.html', args)
+
+    else:
+        client_list_aff = ClientAffaire.objects.order_by('email')
+        args = {'client_list_aff': client_list_aff }
+        return render(request, 'accounts/client_list.html', args)
