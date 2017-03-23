@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'axes',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -137,8 +138,8 @@ LOGIN_EXEMPT_URLS = (
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
-'''
-HTTPS settings -> fonctionne pas sur le serveur de production
+
+#HTTPS settings -> fonctionne pas sur le serveur de production
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
@@ -146,7 +147,7 @@ CSRF_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-'''
+
 
 #SESSIONS CONFIGS
 SESSION_COOKIE_AGE = 600 #logout le user apres X secondes
