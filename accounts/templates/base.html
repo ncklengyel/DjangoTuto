@@ -29,9 +29,10 @@
         <div id="navbar" class="navbar-collapse collapse">
 
           <!-- nav bar pour les user loged in  -->
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and user.is_superuser %}
           <ul class="nav navbar-nav">
             <li><a href="/account/profile">Profile</a></li>
+            <li><a href="/account/client-list/">Liste clients</a></li>
             <li><a href="/admin/">Admin</a></li>
           </ul>
 
@@ -39,10 +40,20 @@
             <li><a href="/account/logout/">Logout</a></li>
           </ul>
 
+          {% elif user.is_authenticated %}
+          <ul class="nav navbar-nav">
+            <li><a href="/account/profile">Profile</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/account/logout/">Logout</a></li>
+          </ul>
+
+
           <!-- nav bar pour les user non loged in  -->
           {% else %}
           <ul class="nav navbar-nav">
-            <li><a href="/admin/">Admin</a></li>
+
           </ul>
 
 

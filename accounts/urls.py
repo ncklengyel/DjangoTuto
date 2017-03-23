@@ -6,7 +6,7 @@ password_reset_complete
 )
 
 ## Part 23 Django Max Goodridge
-
+#TODO Restrindre client-list aux utilisateurs non autorisé
 urlpatterns = [
     url(r'^$', views.home),
     url(r'^login/$', login, {'template_name': 'accounts/login.html'}),
@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset-password/complete/$', password_reset_complete, name='password_reset_complete'),
     url(r'^lock-out/$', views.lock_out, name='lock_out'),
+    url(r'^client-list/$', views.client_list, name='client_list'),
 ]

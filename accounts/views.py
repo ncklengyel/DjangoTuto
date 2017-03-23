@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, render_to_response
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from accounts.forms import RegistrationForm, EditProfileForm
@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash, logout
 from django.contrib.auth.decorators import login_required
 from lab5 import settings
+from .models import ClientResidentiel, ClientAffaire
 
 def lock_out(request):
     return render(request, 'accounts/lock_out.html')
@@ -81,3 +82,11 @@ def change_password(request):
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
+
+def client_list(request):
+    client_list_res = ClientResidentiel.objects.order_by('email')
+    client_list_aff = ClientAffaire.objects.order_by('email')
+
+
+    args = {'client_list_res': client_list_res, 'client_list_aff': client_list_aff }
+    return render(request, 'accounts/client_list.html', args)

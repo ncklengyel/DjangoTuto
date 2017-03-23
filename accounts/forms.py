@@ -27,9 +27,8 @@ class RegistrationForm(UserCreationForm):
 
         return user
 
-'''
-form qui herite de UserChangeForm pour edit les info du user
-'''
+
+#form qui herite de UserChangeForm pour edit les info du user
 class EditProfileForm(UserChangeForm):
     password_confirmation = forms.CharField(widget=forms.PasswordInput,required=True)
 

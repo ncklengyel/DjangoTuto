@@ -149,7 +149,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 '''
 
 #SESSIONS CONFIGS
-SESSION_COOKIE_AGE = 60 #logout le user apres X secondes
+SESSION_COOKIE_AGE = 600 #logout le user apres X secondes
 SESSION_SAVE_EVERY_REQUEST = True
 
 #AXES CONFIGS

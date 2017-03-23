@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Client List</title>
+{% endblock %}
+
+{% block body %}
+<h2>Liste des clients résidentiel</h2>
+<ul>
+  {% for client in client_list_res %}
+  <li><a href="/admin/accounts/clientresidentiel/{{client.id}}">{{client.email}}</a></li>
+  {% endfor %}
+</ul>
+
+<h2>Liste des clients affaire</h2>
+<ul>
+  {% for client in client_list_aff %}
+  <li><a href="/admin/accounts/clientaffaire/{{client.id}}">{{client.email}}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
