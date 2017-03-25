@@ -7,6 +7,8 @@ from django.contrib.auth import update_session_auth_hash, logout
 from django.contrib.auth.decorators import login_required
 from lab5 import settings
 from .models import ClientResidentiel, ClientAffaire
+from django.contrib import messages
+
 
 def lock_out(request):
     return render(request, 'accounts/lock_out.html')
@@ -69,25 +71,22 @@ def success(request):
 #@login_required
 def change_password(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
+        form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, form.user) #garde la session active mm quand on change le password
-            return redirect('/account/profile/')
-
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('/account/profile')
         else:
-            return redirect('/account/change-password/')
+            messages.error(request, 'Please correct the error below.')
 
     else:
-        form = PasswordChangeForm(user=request.user)
-        args = {'form': form}
-        return render(request, 'accounts/change_password.html', args)
-
+        form = PasswordChangeForm(request.user)
+        return render(request, 'accounts/change_password.html', {
+        'form': form
+    })
 
 def client_list(request):
-
-    print(request.user.username)
-    print(request.user.has_perm('accounts.view_all_clients'))
 
     if request.user.has_perm('accounts.view_all_clients') or request.user.is_superuser:
         client_list_res = ClientResidentiel.objects.order_by('email')

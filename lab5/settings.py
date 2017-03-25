@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'axes',
     'sslserver',
+    'password_policies',
 ]
 
 MIDDLEWARE = [
@@ -48,9 +49,12 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'password_policies.middleware.PasswordChangeMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'lab5.middleware.LoginRequiredMiddleware',
+    #'lab5.middleware.LoginRequiredMiddleware', #TODO un comment apres le test avec password_change
+    #'password_policies.middleware.PasswordChangeMiddleware',
+
 ]
 
 ROOT_URLCONF = 'lab5.urls'
@@ -126,14 +130,22 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/account/'
 LOGIN_URL = '/account/login/'
+
 LOGIN_EXEMPT_URLS = (
     r'^account/logout/$',
     r'^account/register/$',
     r'^account/lock-out/$',
+    r'^profile/password-change-done/$',
 
 )
 
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+#Pour Django-password-polities
+SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
+PASSWORD_USE_HISTORY = True #enable password history
+PASSWORD_HISTORY_COUNT = 10 #combien de passwd garder en mémoire
+#PASSWORD_DURATION_SECONDS = 24 * 60**3 # Defaults to 60 days.
+PASSWORD_DURATION_SECONDS = 60*2 # Defaults to 60 days.
+
 
 # pour les email de password reset
 # python -m smtpd -n -c DebuggingServer localhost:1025
