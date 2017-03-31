@@ -86,9 +86,6 @@ def change_password(request):
 @login_required
 def client_list(request):
 
-    print(request.user.username)
-    print(request.user.has_perm('accounts.view_all_clients'))
-
     #Si le user a les permissions de voir tout les clients
     if request.user.has_perm('accounts.view_all_clients') or request.user.is_superuser:
         client_list_res = ClientResidentiel.objects.order_by('email')
