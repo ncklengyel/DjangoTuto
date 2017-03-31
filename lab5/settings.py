@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'lab5.middleware.LoginRequiredMiddleware',
+    #'lab5.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'lab5.urls'

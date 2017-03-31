@@ -11,7 +11,7 @@ from .models import ClientResidentiel, ClientAffaire
 def lock_out(request):
     return render(request, 'accounts/lock_out.html')
 
-#@login_required
+@login_required
 def home(request):
     if request.user.is_authenticated:
         return render(request, 'accounts/home.html')
@@ -37,13 +37,13 @@ def register(request):
         args = {'form': form}
         return render(request, 'accounts/reg_form.html', args)
 
-#@login_required #decorateur pour que seulement les loged in users peuvent voir la page
+@login_required #decorateur pour que seulement les loged in users peuvent voir la page
 def view_profile(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
 #view pour la page de changement d'info du user
-#@login_required
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
@@ -66,7 +66,7 @@ def success(request):
     return render(request, 'accounts/success.html')
 
 #View pour le changement de password d'un user
-#@login_required
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
@@ -83,7 +83,7 @@ def change_password(request):
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
 
-
+@login_required
 def client_list(request):
 
     print(request.user.username)
