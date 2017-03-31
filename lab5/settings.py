@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'axes',
     'sslserver',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -158,7 +159,7 @@ SESSION_SAVE_EVERY_REQUEST = True
 #AXES CONFIGS
 AXES_LOGIN_FAILURE_LIMIT = 10
 AXES_USE_USER_AGENT = False
-AXES_COOLOFF_TIME = 1 #1 heure
+AXES_COOLOFF_TIME = 1 #1 heure avant de deblocage de l'IP
 AXES_ONLY_USER_FAILURES = False
 AXES_NEVER_LOCKOUT_WHITELIST = False
 AXES_IP_WHITELIST = []
