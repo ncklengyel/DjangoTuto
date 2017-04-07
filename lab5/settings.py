@@ -49,12 +49,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'password_policies.middleware.PasswordChangeMiddleware',
+    #'password_policies.middleware.PasswordChangeMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'lab5.middleware.LoginRequiredMiddleware', #TODO un comment apres le test avec password_change
-    #'password_policies.middleware.PasswordChangeMiddleware',
-
 ]
 
 ROOT_URLCONF = 'lab5.urls'
@@ -168,9 +166,11 @@ SESSION_COOKIE_AGE = 600 #logout le user apres X secondes
 SESSION_SAVE_EVERY_REQUEST = True
 
 #AXES CONFIGS
-AXES_LOGIN_FAILURE_LIMIT = 10
+AXES_LOGIN_FAILURE_LIMIT = 3
 AXES_USE_USER_AGENT = False
 AXES_COOLOFF_TIME = 1 #1 heure
 AXES_ONLY_USER_FAILURES = False
 AXES_NEVER_LOCKOUT_WHITELIST = False
 AXES_IP_WHITELIST = []
+AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
+#AXES_ONLY_USER_FAILURES = True
