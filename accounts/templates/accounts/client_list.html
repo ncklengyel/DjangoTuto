@@ -18,7 +18,14 @@
   <li><a href="/admin/accounts/clientaffaire/{{client.id}}">{{client.email}}</a></li>
   {% endfor %}
 </ul>
-{% else %}
+{% elif client_list_res %}
+<h2>Liste des clients résidentiel</h2>
+<ul>
+  {% for client in client_list_res %}
+  <li><a href="/admin/accounts/clientresidentiel/{{client.id}}">{{client.email}}</a></li>
+  {% endfor %}
+</ul>
+{% elif client_list_aff %}
 <h2>Liste des clients affaire</h2>
 <ul>
   {% for client in client_list_aff %}

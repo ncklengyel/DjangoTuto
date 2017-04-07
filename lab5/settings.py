@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    #'lab5.sleep_middleware.SleepMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -142,7 +143,8 @@ SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
 PASSWORD_USE_HISTORY = True #enable password history
 PASSWORD_HISTORY_COUNT = 10 #combien de passwd garder en mémoire
 #PASSWORD_DURATION_SECONDS = 24 * 60**3 # Defaults to 60 days.
-PASSWORD_DURATION_SECONDS = 60*2 # Defaults to 60 days.
+PASSWORD_DURATION_SECONDS = 60*1000 # Defaults to 60 days.
+PASSWORD_MIN_LENGTH = 10
 
 
 # pour les email de password reset
@@ -162,11 +164,11 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 #SESSIONS CONFIGS
-SESSION_COOKIE_AGE = 600 #logout le user apres X secondes
+SESSION_COOKIE_AGE = 60 * 5 #logout le user apres X secondes
 SESSION_SAVE_EVERY_REQUEST = True
 
 #AXES CONFIGS
-AXES_LOGIN_FAILURE_LIMIT = 5
+AXES_LOGIN_FAILURE_LIMIT = 10
 AXES_USE_USER_AGENT = False
 AXES_COOLOFF_TIME = 1 #1 heure
 AXES_ONLY_USER_FAILURES = False

@@ -30,5 +30,7 @@ urlpatterns = [
     url(r'^client-list/$', views.client_list, name='client_list'),
     url(r'^accounts/password/change/$', password_change, {'template_name': 'registration/password_change_form.html'},name='password_change'),
     url(r'^accounts/password/change/done/$', password_change_done,{'template_name': 'registration/password_change_done.html'},name='password_change_done'),
+    #url(r'^accounts/password/change/$', views.change_password , name='change_password'),
+
 
 ]

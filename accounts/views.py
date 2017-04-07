@@ -39,13 +39,13 @@ def register(request):
         args = {'form': form}
         return render(request, 'accounts/reg_form.html', args)
 
-#@login_required #decorateur pour que seulement les loged in users peuvent voir la page
+@login_required #decorateur pour que seulement les loged in users peuvent voir la page
 def view_profile(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
 #view pour la page de changement d'info du user
-#@login_required
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
@@ -68,7 +68,7 @@ def success(request):
     return render(request, 'accounts/success.html')
 
 #View pour le changement de password d'un user
-#@login_required
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -79,6 +79,7 @@ def change_password(request):
             return redirect('/account/profile')
         else:
             messages.error(request, 'Please correct the error below.')
+            return redirect('/account/change-password/')
 
     else:
         form = PasswordChangeForm(request.user)
@@ -86,16 +87,22 @@ def change_password(request):
         'form': form
     })
 
+@login_required
 def client_list(request):
 
-    if request.user.has_perm('accounts.view_all_clients') or request.user.is_superuser:
+    if request.user.is_superuser:
         client_list_res = ClientResidentiel.objects.order_by('email')
         client_list_aff = ClientAffaire.objects.order_by('email')
 
         args = {'client_list_res': client_list_res, 'client_list_aff': client_list_aff }
         return render(request, 'accounts/client_list.html', args)
 
-    else:
+    elif request.user.has_perm('accounts.view_clients_residentiel'):
+        client_list_res = ClientResidentiel.objects.order_by('email')
+        args = {'client_list_res': client_list_res}
+        return render(request, 'accounts/client_list.html', args)
+
+    elif request.user.has_perm('accounts.view_clients_affaire'):
         client_list_aff = ClientAffaire.objects.order_by('email')
         args = {'client_list_aff': client_list_aff }
         return render(request, 'accounts/client_list.html', args)

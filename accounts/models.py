@@ -27,7 +27,8 @@ class PreposeResidentielProfile(models.Model):
 
     class Meta:
         permissions = (
-            ('view_all_clients', 'can view all clients'),
+            ('view_clients_affaire', 'view_clients_affaire'),
+            ('view_clients_residentiel', 'view_clients_residentiel'),
         )
 
     def __str__(self):
